@@ -1,8 +1,11 @@
 ---
 title: CareerForge AI Backend
-emoji: ⚡
+emoji: 🚀
 colorFrom: green
 colorTo: blue
 sdk: docker
 pinned: false
 ---
+
+# CareerForge AI Backend
+FastAPI backend for CareerForge AI platform.

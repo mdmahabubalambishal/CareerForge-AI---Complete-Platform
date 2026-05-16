@@ -10,19 +10,11 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:3000",
-        "http://localhost:3001",
-        "https://localhost:3000",
-        "https://localhost:3001",
-        "http://127.0.0.1:3000",
-        "http://127.0.0.1:3001",
-        "https://127.0.0.1:3000",
-        "https://127.0.0.1:3001",
-        # Chrome Extension
-        "chrome-extension://amghaeacmdhhfklmmlhmlhfoppcjjldg",
-        # Allow all extensions (development)
-        "chrome-extension://*",
+        "https://*.vercel.app",
+        "https://careerforge-ai.vercel.app",  # তোমার Vercel URL পরে add করবে
+        "chrome-extension://amghaeacmdhhfklmmlhmlhfoppcjjldg",  # Chrome extension
+        "chrome-extension://*",  # Allow all extensions (development)
     ],
-    allow_origin_regex=r"^https?://(localhost|127\.0\.0\.1|192\.168\.\d+\.\d+)(:\d+)?$",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
