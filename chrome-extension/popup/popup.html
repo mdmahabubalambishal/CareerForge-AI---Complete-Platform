@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      width: 380px;
+      min-height: 200px;
+      background: #06080d;
+      color: #e2ecf8;
+      font-family: system-ui, sans-serif;
+      padding: 16px;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #1e2838;
+    }
+    .logo-icon {
+      width: 28px; height: 28px;
+      background: linear-gradient(135deg, #00f0c8, #4d9fff);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px;
+    }
+    .logo-text { font-weight: 700; font-size: 15px; }
+    .logo-text span { color: #00f0c8; }
+    .section { margin-bottom: 12px; }
+    .label { font-size: 10px; color: #4a6680; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+    .value { font-size: 13px; color: #e2ecf8; background: #0c1018; border: 1px solid #1e2838; border-radius: 8px; padding: 8px 12px; }
+    .value.small { font-size: 11px; color: #7a96b0; max-height: 60px; overflow: hidden; }
+    .btn {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-bottom: 8px;
+      font-family: system-ui, sans-serif;
+    }
+    .btn-primary { background: #00f0c8; color: #000; }
+    .btn-primary:hover { background: #fff; }
+    .btn-secondary { background: #9b7bff; color: #fff; }
+    .btn-ghost { background: #0c1018; border: 1px solid #1e2838; color: #7a96b0; }
+    .status {
+      background: #0c1018;
+      border: 1px solid #1e2838;
+      border-radius: 8px;
+      padding: 10px;
+      font-size: 11px;
+      color: #7a96b0;
+      margin-bottom: 10px;
+      display: none;
+    }
+    .status.show { display: block; }
+    .status.success { border-color: #39e87a40; color: #39e87a; }
+    .status.loading { border-color: #00f0c840; color: #00f0c8; }
+    .status.error { border-color: #ff5c9c40; color: #ff5c9c; }
+    .login-section { text-align: center; padding: 20px 0; }
+    .login-section p { font-size: 12px; color: #4a6680; margin-bottom: 12px; }
+    input {
+      width: 100%;
+      background: #111620;
+      border: 1px solid #1e2838;
+      border-radius: 8px;
+      padding: 8px 12px;
+      color: #e2ecf8;
+      font-size: 12px;
+      margin-bottom: 8px;
+      outline: none;
+      font-family: system-ui;
+    }
+    input:focus { border-color: #00f0c8; }
+    .result-box {
+      background: #111620;
+      border: 1px solid #1e2838;
+      border-radius: 8px;
+      padding: 10px;
+      font-size: 11px;
+      color: #c8d8e8;
+      line-height: 1.5;
+      max-height: 120px;
+      overflow-y: auto;
+      margin-bottom: 8px;
+      display: none;
+    }
+    .result-box.show { display: block; }
+    .result-label { font-size: 10px; color: #00f0c8; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+  </style>
+</head>
+<body>
+  <div class="logo">
+    <div class="logo-icon">⚡</div>
+    <div class="logo-text">Career<span>Forge</span> AI</div>
+  </div>
+
+  <!-- Login Section -->
+  <div id="login-section" class="login-section" style="display:none">
+    <p>Login with your CareerForge account</p>
+    <input type="email" id="email-input" placeholder="Email..." />
+    <input type="password" id="password-input" placeholder="Password..." />
+    <button class="btn btn-primary" id="login-btn">Login →</button>
+  </div>
+
+  <!-- Main Section -->
+  <div id="main-section" style="display:none">
+    <div id="job-info">
+      <div class="section">
+        <div class="label">Detected Job</div>
+        <div class="value" id="job-title">Detecting...</div>
+      </div>
+      <div class="section">
+        <div class="label">Company</div>
+        <div class="value" id="job-company">-</div>
+      </div>
+      <div class="section">
+        <div class="label">Description Preview</div>
+        <div class="value small" id="job-desc">-</div>
+      </div>
+    </div>
+
+    <div class="status" id="status-box"></div>
+    <div class="result-box" id="result-box">
+      <div class="result-label" id="result-label">Result</div>
+      <div id="result-content"></div>
+    </div>
+
+    <button class="btn btn-primary" id="auto-apply-btn">⚡ Auto-Generate Application</button>
+    <button class="btn btn-secondary" id="add-job-btn">🤖 Add to Job List</button>
+    <button class="btn btn-ghost" id="dashboard-btn">📊 Open Dashboard</button>
+    <button class="btn btn-ghost" id="logout-btn" style="font-size:11px; padding:6px; color:#4a6680;">Disconnect</button>
+  </div>
+
+  <!-- No Job Section -->
+  <div id="no-job-section" style="display:none; text-align:center; padding:20px 0;">
+    <div style="font-size:32px; margin-bottom:10px;">🔍</div>
+    <p style="font-size:12px; color:#4a6680; margin-bottom:12px;">
+      Navigate to a LinkedIn job posting to use CareerForge
+    </p>
+    <button class="btn btn-ghost" id="dashboard-btn-2">📊 Open Dashboard</button>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,239 @@
+/* CareerForge Extension Styles */
+
+/* ── Floating Button ── */
+#cf-tracker-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #00f0c8, #4d9fff);
+  color: #000;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 10px 18px;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 4px 24px rgba(0, 240, 200, 0.4);
+  transition: all 0.2s ease;
+  user-select: none;
+  border: none;
+}
+
+#cf-tracker-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 32px rgba(0, 240, 200, 0.5);
+}
+
+#cf-tracker-btn.cf-saved {
+  background: linear-gradient(135deg, #39e87a, #00f0c8);
+}
+
+.cf-btn-icon {
+  font-size: 16px;
+}
+
+.cf-btn-text {
+  white-space: nowrap;
+}
+
+/* ── Modal Overlay ── */
+#cf-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999999;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* ── Modal ── */
+.cf-modal {
+  background: #0c1018;
+  border: 1px solid #1e2838;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 520px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.cf-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid #1e2838;
+}
+
+.cf-modal-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.cf-logo {
+  font-size: 18px;
+}
+
+.cf-close-btn {
+  background: none;
+  border: none;
+  color: #4a6680;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: color 0.15s;
+}
+
+.cf-close-btn:hover {
+  color: #fff;
+}
+
+.cf-platform-badge {
+  margin: 12px 20px 0;
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+  background: rgba(0, 240, 200, 0.15);
+  color: #00f0c8;
+  border: 1px solid rgba(0, 240, 200, 0.3);
+}
+
+/* ── Form ── */
+.cf-form {
+  padding: 16px 20px 20px;
+}
+
+.cf-form-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.cf-form-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+
+.cf-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #7a96b0;
+  display: block;
+}
+
+.cf-input {
+  width: 100%;
+  background: #111620;
+  border: 1px solid #1e2838;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 13px;
+  color: #fff;
+  outline: none;
+  transition: border-color 0.15s;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.cf-input:focus {
+  border-color: #00f0c8;
+}
+
+.cf-input option {
+  background: #111620;
+  color: #fff;
+}
+
+.cf-textarea {
+  resize: none;
+  height: 60px;
+}
+
+/* ── Message ── */
+.cf-message {
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.cf-message-success {
+  background: rgba(57, 232, 122, 0.15);
+  border: 1px solid rgba(57, 232, 122, 0.3);
+  color: #39e87a;
+}
+
+.cf-message-error {
+  background: rgba(255, 92, 156, 0.15);
+  border: 1px solid rgba(255, 92, 156, 0.3);
+  color: #ff5c9c;
+}
+
+/* ── Buttons ── */
+.cf-btn-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.cf-cancel-btn {
+  flex: 1;
+  background: #111620;
+  border: 1px solid #1e2838;
+  color: #7a96b0;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: inherit;
+}
+
+.cf-cancel-btn:hover {
+  color: #fff;
+  border-color: #263040;
+}
+
+.cf-save-btn {
+  flex: 2;
+  background: linear-gradient(135deg, #00f0c8, #4d9fff);
+  border: none;
+  color: #000;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: inherit;
+}
+
+.cf-save-btn:hover {
+  filter: brightness(1.1);
+}
+
+.cf-save-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

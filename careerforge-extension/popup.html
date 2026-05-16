@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CareerForge AI</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      width: 320px;
+      background: #06080d;
+      color: #fff;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 13px;
+    }
+
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, #0c1018, #111620);
+      border-bottom: 1px solid #1e2838;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo {
+      width: 32px; height: 32px;
+      background: linear-gradient(135deg, #00f0c8, #4d9fff);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; font-weight: bold; color: #000;
+    }
+    .header-text h1 { font-size: 13px; font-weight: 700; color: #fff; }
+    .header-text p { font-size: 11px; color: #4a6680; margin-top: 1px; }
+
+    /* Pages */
+    .page { display: none; }
+    .page.active { display: block; }
+    .body { padding: 16px; }
+
+    /* Login Page */
+    .login-welcome {
+      text-align: center;
+      padding: 16px 0 20px;
+    }
+    .login-welcome .icon { font-size: 36px; margin-bottom: 10px; }
+    .login-welcome h2 { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+    .login-welcome p { font-size: 12px; color: #4a6680; }
+
+    /* Dashboard Page */
+    .user-card {
+      background: #0c1018;
+      border: 1px solid #1e2838;
+      border-radius: 10px;
+      padding: 12px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .user-info { display: flex; align-items: center; gap: 10px; }
+    .user-avatar {
+      width: 32px; height: 32px;
+      background: linear-gradient(135deg, #00f0c8, #9b7bff);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 700; color: #000;
+    }
+    .user-name { font-size: 12px; font-weight: 600; color: #fff; }
+    .user-email { font-size: 10px; color: #4a6680; }
+    .logout-btn {
+      font-size: 10px; color: #4a6680;
+      background: none; border: none; cursor: pointer;
+      padding: 4px 8px; border-radius: 6px;
+      transition: color 0.15s;
+    }
+    .logout-btn:hover { color: #ff5c9c; }
+
+    /* Status */
+    .status-card {
+      background: #0c1018; border: 1px solid #1e2838;
+      border-radius: 10px; padding: 10px 12px; margin-bottom: 12px;
+    }
+    .status-row { display: flex; align-items: center; justify-content: space-between; }
+    .status-label { font-size: 11px; color: #7a96b0; }
+    .status-dot { width: 8px; height: 8px; border-radius: 50%; background: #ff5c9c; }
+    .status-dot.connected { background: #39e87a; animation: pulse 2s infinite; }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+    .status-text { font-size: 11px; font-weight: 600; }
+    .status-text.connected { color: #39e87a; }
+    .status-text.disconnected { color: #ff5c9c; }
+
+    /* Section */
+    .section-title {
+      font-size: 11px; font-weight: 700; color: #4a6680;
+      text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px;
+    }
+
+    /* Platforms */
+    .platforms { display: flex; gap: 6px; margin-bottom: 14px; }
+    .platform-tag {
+      flex: 1; text-align: center; padding: 6px 4px;
+      border-radius: 6px; font-size: 10px; font-weight: 600;
+      background: #0c1018; border: 1px solid #1e2838; color: #4a6680;
+    }
+    .platform-tag.active {
+      background: rgba(0, 240, 200, 0.1);
+      border-color: rgba(0, 240, 200, 0.3); color: #00f0c8;
+    }
+
+    /* Stats */
+    .stats-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; margin-bottom: 14px; }
+    .stat-card {
+      background: #0c1018; border: 1px solid #1e2838;
+      border-radius: 8px; padding: 8px; text-align: center;
+    }
+    .stat-val { font-size: 18px; font-weight: 700; }
+    .stat-label { font-size: 9px; color: #4a6680; margin-top: 2px; }
+
+    /* Buttons */
+    .btn {
+      width: 100%; padding: 9px; border-radius: 8px;
+      font-size: 12px; font-weight: 700; cursor: pointer; border: none;
+      transition: all 0.15s; margin-bottom: 8px; font-family: inherit;
+    }
+    .btn-primary { background: linear-gradient(135deg, #00f0c8, #4d9fff); color: #000; }
+    .btn-primary:hover { filter: brightness(1.1); }
+    .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+    .btn-secondary { background: #111620; border: 1px solid #1e2838; color: #7a96b0; }
+    .btn-secondary:hover { color: #fff; border-color: #263040; }
+    .btn-danger { background: rgba(255, 92, 156, 0.15); border: 1px solid rgba(255,92,156,0.3); color: #ff5c9c; }
+    .btn-danger:hover { background: rgba(255,92,156,0.25); }
+
+    /* Inputs */
+    .input-group { margin-bottom: 10px; }
+    label { display: block; font-size: 11px; color: #7a96b0; margin-bottom: 4px; }
+    input {
+      width: 100%; background: #111620; border: 1px solid #1e2838;
+      border-radius: 8px; padding: 8px 10px; font-size: 12px; color: #fff;
+      outline: none; transition: border-color 0.15s; font-family: inherit;
+    }
+    input:focus { border-color: #00f0c8; }
+
+    /* Message */
+    .message {
+      padding: 8px 12px; border-radius: 8px; font-size: 12px;
+      font-weight: 500; margin-bottom: 10px; display: none;
+    }
+    .message.success { background: rgba(57,232,122,0.15); border: 1px solid rgba(57,232,122,0.3); color: #39e87a; }
+    .message.error { background: rgba(255,92,156,0.15); border: 1px solid rgba(255,92,156,0.3); color: #ff5c9c; }
+    .message.info { background: rgba(77,159,255,0.15); border: 1px solid rgba(77,159,255,0.3); color: #4d9fff; }
+
+    .divider { height: 1px; background: #1e2838; margin: 12px 0; }
+
+    .open-btn {
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      text-decoration: none; color: #7a96b0; font-size: 11px; padding: 8px;
+      border-radius: 8px; border: 1px solid #1e2838; transition: all 0.15s; background: #0c1018;
+    }
+    .open-btn:hover { color: #fff; border-color: #263040; }
+
+    /* URL setting small */
+    .url-row {
+      display: flex; gap: 6px; align-items: center; margin-bottom: 14px;
+    }
+    .url-row input { font-size: 11px; padding: 6px 8px; }
+    .url-row button {
+      flex-shrink: 0; padding: 6px 10px; font-size: 11px; font-weight: 600;
+      background: #111620; border: 1px solid #1e2838; color: #7a96b0;
+      border-radius: 6px; cursor: pointer; white-space: nowrap; font-family: inherit;
+    }
+    .url-row button:hover { color: #fff; }
+
+    .footer {
+      padding: 10px 16px; border-top: 1px solid #1e2838;
+      text-align: center; font-size: 10px; color: #4a6680;
+    }
+    .footer span { color: #00f0c8; font-weight: 600; }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">⚡</div>
+    <div class="header-text">
+      <h1>CareerForge AI</h1>
+      <p>Job Tracker Extension</p>
+    </div>
+  </div>
+
+  <!-- ── LOGIN PAGE ── -->
+  <div class="page active" id="page-login">
+    <div class="body">
+      <div class="login-welcome">
+        <div class="icon">🔐</div>
+        <h2>Welcome Back</h2>
+        <p>Login to start tracking jobs automatically</p>
+      </div>
+
+      <!-- URL Settings -->
+      <div class="section-title">Frontend URL (Next.js)</div>
+      <div class="url-row">
+        <input type="url" id="login-api-url" placeholder="http://localhost:3000" />
+        <button id="save-url-btn">Save</button>
+      </div>
+      <div class="section-title">Backend URL (FastAPI)</div>
+      <div class="url-row">
+        <input type="url" id="login-backend-url" placeholder="http://localhost:8000" />
+        <button id="save-backend-url-btn">Save</button>
+      </div>
+
+      <div id="login-message" class="message"></div>
+
+      <div class="input-group">
+        <label>Email</label>
+        <input type="email" id="login-email" placeholder="your@email.com" autocomplete="email" />
+      </div>
+
+      <div class="input-group">
+        <label>Password</label>
+        <input type="password" id="login-password" placeholder="Your password" autocomplete="current-password" />
+      </div>
+
+      <button class="btn btn-primary" id="login-btn">⚡ Login to CareerForge</button>
+    </div>
+  </div>
+
+  <!-- ── DASHBOARD PAGE ── -->
+  <div class="page" id="page-dashboard">
+    <div class="body">
+
+      <!-- User Card -->
+      <div class="user-card">
+        <div class="user-info">
+          <div class="user-avatar" id="user-avatar">CF</div>
+          <div>
+            <div class="user-name" id="user-name">Loading...</div>
+            <div class="user-email" id="user-email"></div>
+          </div>
+        </div>
+        <button class="logout-btn" id="logout-btn">Logout</button>
+      </div>
+
+      <!-- Connection Status -->
+      <div class="status-card">
+        <div class="status-row">
+          <span class="status-label">Status</span>
+          <div style="display:flex;align-items:center;gap:6px">
+            <div class="status-dot connected" id="status-dot"></div>
+            <span class="status-text connected" id="status-text">Connected ✓</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Active Platforms -->
+      <div class="section-title">Active on</div>
+      <div class="platforms">
+        <div class="platform-tag" id="platform-linkedin">LinkedIn</div>
+        <div class="platform-tag" id="platform-indeed">Indeed</div>
+        <div class="platform-tag" id="platform-glassdoor">Glassdoor</div>
+      </div>
+
+      <!-- Stats -->
+      <div class="section-title">Your Stats</div>
+      <div class="stats-grid" id="stats-grid">
+        <div class="stat-card">
+          <div class="stat-val" style="color:#00f0c8" id="stat-total">—</div>
+          <div class="stat-label">Total Apps</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-val" style="color:#ff7c4d" id="stat-interviewing">—</div>
+          <div class="stat-label">Interviews</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-val" style="color:#39e87a" id="stat-offers">—</div>
+          <div class="stat-label">Offers</div>
+        </div>
+      </div>
+
+      <div id="dashboard-message" class="message"></div>
+
+      <a class="open-btn" id="open-dashboard" href="#" target="_blank">
+        🚀 Open CareerForge Dashboard
+      </a>
+
+      <div class="divider"></div>
+
+      <div class="section-title">How to use</div>
+      <p style="font-size:11px;color:#4a6680;line-height:1.6;margin-bottom:12px">
+        Open any job on <strong style="color:#7a96b0">LinkedIn</strong>, <strong style="color:#7a96b0">Indeed</strong>, or <strong style="color:#7a96b0">Glassdoor</strong> and click the <strong style="color:#00f0c8">⚡ Track Job</strong> button that appears on the page.
+      </p>
+    </div>
+  </div>
+
+  <div class="footer">
+    Powered by <span>CareerForge AI</span>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
