@@ -1,9 +1,5 @@
-backend/venv/
-backend/venv
-venv/
-node_modules/
-.next/
-__pycache__/
-*.pyc
-.env
-.env.local
+echo "backend/venv/" >> .gitignore
+echo "frontend/node_modules/" >> .gitignore
+echo "backend/__pycache__/" >> .gitignore
+echo "backend/chroma_db/" >> .gitignore
+echo ".next/" >> .gitignore
