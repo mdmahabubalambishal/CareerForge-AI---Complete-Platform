@@ -1,20 +1,14 @@
-const CACHE_NAME = 'careerforge-v1'
-const STATIC_ASSETS = [
-  '/',
-  '/dashboard',
-  '/manifest.json',
-]
+self.addEventListener('install', () => {
+  self.skipWaiting()
+})
 
-self.addEventListener('install', event => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => cache.addAll(STATIC_ASSETS))
-  )
+self.addEventListener('activate', () => {
+  self.clients.claim()
 })
 
 self.addEventListener('fetch', event => {
-  event.respondWith(
-    caches.match(event.request).then(response => {
-      return response || fetch(event.request)
-    })
-  )
+  // Only handle same-origin requests
+  if (event.request.url.startsWith(self.location.origin)) {
+    event.respondWith(fetch(event.request))
+  }
 })
